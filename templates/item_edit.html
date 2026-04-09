@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食物編輯
+    </title>
+</head>
+<body>
+    <p>
+        <input type="button" value="回首頁" onclick="location.href='/'">
+    </p>
+    <img src={{item_img_link}}>
+    <form action = "/update/{{item_id}}" method = "post" enctype="multipart/form-data">
+        <p><input type="text" name = "food_name" placeholder = "品名" value = {{item_name}}></p>
+        <h3>保存日期</h3>
+        <p><input type="date" name = "exp_date" value = {{item_exp_date}} required></p>
+        <h3>數量</h3>
+        <p><input type="number" name = "food_amount" min = 1 value = {{item_amount}} required></p>
+        <h3>備註</h3>
+        <textarea name = "food_remarks" value={{item_remarks}} placeholder = "備註"></textarea>
+        <p><input type="submit" value = "確認"></p>
+    </form>
+        <button onclick="turn_home_page()">取消</button>
+
+</body>
+    <script>
+        function turn_home_page(){
+            window.location.href = "{{url_for("home")}}"
+        }
+    </script>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食物管理</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <input type="button" value="回首頁" onclick="location.href='/'">
+    <table>
+    <tr>
+        <td>品名</td>
+        <td>圖片</td>
+        <td>保存日期</td>
+        <td>數量</td>
+        <td>備註</td>
+    </tr>
+    {%for food in display_list%}
+        <tr>
+            <td>{{food["name"]}}</td>
+            <td>
+                <img src="{{food["img_link"]}}">
+            </td>
+            <td>{{food["exp_date"]}}</td>
+            <td>{{food["amount"]}}</td>
+            <td>{{food["remarks"]}}</td>
+            {% with food_id = food["_id"]%}
+                <td>
+                    <button onclick="turn_edit_page('{{food_id}}')">編輯</button>
+                </td>  
+                <td>
+                    <form action = "/delete/{{food_id}}" onsubmit="return double_check()" method = "post" enctype="multipart/form-data">
+                        <button type="submit">刪除</button>
+                    </form>
+                </td>
+            {% endwith %}
+        </tr>
+    {%endfor%}
+    </table>
+        <button onclick="last_upload_page()"
+            {% if not l %}
+                disabled                   
+            {% endif %}>
+            上一頁
+        </button>
+        <button onclick="next_upload_page()"
+            {% if not n %}
+                disabled
+            {% endif %}>
+            下一頁
+        </button>
+
+</body>
+    <script>
+        function last_upload_page(){
+            window.location.href = "{{url_for("food_management", page = web_page-1)}}"
+        }
+        function next_upload_page(){
+            window.location.href = "{{url_for("food_management", page = web_page+1)}}"
+        }
+        function turn_edit_page(food_id){
+            window.location.href = "/edit/"+food_id
+        }
+        function double_check(){
+            return confirm("確定要刪除品項?")
+        }
+    </script>
+</html>

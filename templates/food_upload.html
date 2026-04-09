@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上傳食物</title>
+</head>
+<body>
+    <h1>上傳食物</h1>
+    <input type="button" value="回首頁" onclick="location.href='/'">
+    <form action = "#" method = "post" enctype="multipart/form-data">
+        <p><input type="text" name = "food_name" placeholder = "品名"></p>
+        <p><input type="file" name = "food_img" accept = "image/*" required></p>
+        <h3>保存日期</h3>
+        <p><input type="date" name = "exp_date" required></p>
+        <h3>數量</h3>
+        <p><input type="number" name = "food_amount" min = 1 required></p>
+        <h3>備註</h3>
+        <textarea name = "food_remarks" placeholder = "備註"></textarea>
+        <p><input type="submit" value = "提交"></p>
+    </form>
+</body>
+</html>

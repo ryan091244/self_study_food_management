@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食物管理</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h1>冰箱管理</h1>
+    <button onclick="turn_upload_page()">上傳</button>
+    <button onclick="turn_management_page()">管理</button>
+
+    <script>
+        function turn_upload_page(){
+            window.location.href = "{{url_for("food_upload")}}"
+        }
+        function turn_management_page(){
+            window.location.href = "{{url_for("food_management",page=0)}}"
+        }
+    </script>
+</body>
+</html>
